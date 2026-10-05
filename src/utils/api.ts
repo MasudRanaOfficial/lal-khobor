@@ -1,4 +1,4 @@
-import type { Nav, NewsItem, NewsSection } from "@/types/newstypes";
+import type { MostReadArticle, Nav, NewsItem, NewsSection } from "@/types/newstypes";
 
 export const navData = async (): Promise<Nav[]> => {
   const res = await fetch("https://news-api-v2.vercel.app/api/categories", {
@@ -28,6 +28,18 @@ export const marqueeData = async (): Promise<NewsItem[]> => {
 
 export const homePageData = async (): Promise<NewsSection[]> => {
   const res = await fetch("https://news-api-v2.vercel.app/api/news/sections");
+  if (!res.ok) {
+    return [];
+  }
+
+  const data = await res.json();
+
+  return Array.isArray(data?.data) ? data.data : [];
+};
+
+
+export const mostReadData = async (): Promise<MostReadArticle[]> => {
+  const res = await fetch("https://news-api-v2.vercel.app/api/news/most-read");
   if (!res.ok) {
     return [];
   }

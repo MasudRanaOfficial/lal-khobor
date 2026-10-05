@@ -44,3 +44,19 @@ export interface NewsSection {
   count: number;
   articles: Article[];
 }
+
+export interface MostReadArticle {
+  id: string;
+  title: string;
+  description: string | null;
+  link: string;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  category: string;
+  type: string;
+  isLive: boolean;
+  firstPublished: string | null;
+  lastPublished: string | null;
+  source: string;
+  rank: number;
+}

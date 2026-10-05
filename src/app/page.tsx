@@ -1,6 +1,7 @@
 import NewsCard from "@/components/cards/NewsCard";
 import MainNews from "@/components/home/MainNews";
 import Marquee from "@/components/home/Marquee";
+import MostRead from "@/components/home/MostRead";
 import { Article } from "@/types/newstypes";
 import { homePageData } from "@/utils/api";
 
@@ -48,6 +49,7 @@ export default async function Home() {
           {/* Sidebar / Most Read Section (Right 1 Column) */}
           <aside className="lg:col-span-1">
             {/* Sidebar widgets or most-read articles go here */}
+            <MostRead/>
           </aside>
         </div>
       </main>
