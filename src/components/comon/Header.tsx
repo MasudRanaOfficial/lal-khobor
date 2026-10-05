@@ -9,11 +9,11 @@ const Header = () => {
     <header className="w-full bg-white border-b border-gray-100 py-4 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="hidden md:block w-36" aria-hidden="true" />
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="flex items-center gap-3">
-            <div className="w-15 h-15 bg-slate-950 rounded-xl flex items-center justify-center shadow-sm">
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center shadow-sm">
               <Image
-                className="w-10 h-10"
+                className="w-6 h-6"
                 height={300}
                 width={300}
                 src="/Logo.png"
@@ -22,10 +22,10 @@ const Header = () => {
             </div>
 
             <div>
-              <div className="text-2xl md:text-3xl font-serif font-bold tracking-tight">
-                <span className="text-red-500">লাল</span> খবর
+              <div className="text-3xl md:text-4xl font-bold tracking-tight">
+                <span className="text-red-600">লাল</span> খবর
               </div>
-              <div className="mt-1 text-xs md:text-sm text-gray-500 font-medium">
+              <div className="text-[-10px] md:text-xs text-gray-500 font-medium">
                 {date}
               </div>
             </div>

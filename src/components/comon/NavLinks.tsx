@@ -9,7 +9,7 @@ const NavLinks = async () => {
   return (
     <nav className="w-full bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ul className="flex items-center justify-center space-x-6 md:space-x-8 py-3 text-sm md:text-base font-medium text-gray-800">
+        <ul className="flex items-center justify-center space-x-6 md:space-x-8 pt-3 text-sm md:text-base font-medium text-gray-800">
           <Link href="/" className="text-red-700 font-semibold">
             হোম
           </Link>
