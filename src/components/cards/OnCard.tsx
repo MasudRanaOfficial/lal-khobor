@@ -1,7 +1,7 @@
 import { Article } from "@/types/newstypes";
 
 interface OtherNewProps {
-  otherNew: Article; // Each item is a single Article, not Article[]
+  otherNew: Article;
 }
 
 const OnCard = ({ otherNew }: OtherNewProps) => {
