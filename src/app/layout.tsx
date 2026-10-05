@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/comon/Header";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["latin"],
@@ -8,16 +9,22 @@ const notoSerifBengali = Noto_Serif_Bengali({
 
 export const metadata: Metadata = {
   title: "লাল খবর",
-  description: "",
+  description:
+    "সময়ের প্রতিধ্বনি, নির্ভীক কণ্ঠস্বর। প্রতিদিনের ব্রেকিং নিউজ এবং গভীর বিশ্লেষণের নির্ভরযোগ্য ঠিকানা লাল খবর।",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
+      data-theme="light"
       lang="en"
       className={`${notoSerifBengali.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col"
+      >
+        <Header></Header>
+        
+        {children}</body>
     </html>
   );
 }
