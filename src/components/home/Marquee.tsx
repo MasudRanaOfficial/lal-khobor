@@ -15,7 +15,7 @@ const Marquee = async () => {
           {Array.isArray(data) &&
             data.map((d) => (
               <span key={d.id}>
-                <Link href={d.link}
+                <Link href={`/news/${d.id}`}
                 className="hover:underline"
                 >{d.title}</Link>
                 <span className="mx-5">•</span>
