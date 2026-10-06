@@ -44,7 +44,7 @@ const MainNews = ({ news }: MainNewsProps) => {
 
         {/* Right Column: Other News List */}
         <div className="card bg-base-100 border border-gray-200 rounded-xl p-5 shadow-xs divide-y divide-gray-200 flex flex-col h-full">
-          {otherNews.slice(0, 4).map((item) => (
+          {otherNews.slice(0, 5).map((item) => (
             <OnCard key={item.id} otherNew={item} />
           ))}
         </div>
