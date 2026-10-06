@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
-import Marquee from "../home/Marquee";
+import Marquee from "./Marquee";
 
 const Header = () => {
   const date = new Intl.DateTimeFormat("bn-BD", {
