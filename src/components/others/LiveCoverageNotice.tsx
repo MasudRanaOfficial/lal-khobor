@@ -10,7 +10,7 @@ export const LiveCoverageNotice: React.FC<LiveCoverageNoticeProps> = ({
   sourceUrl,
 }) => {
   return (
-    <main className="min-h-[70vh] flex items-center justify-center px-4 py-12">
+    <main className="flex items-center justify-center px-4 py-12">
       <div className="max-w-lg w-full bg-white border border-gray-200 rounded-2xl p-8 shadow-sm text-center">
         {/* লাইভ ব্যাজ */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold mb-6">

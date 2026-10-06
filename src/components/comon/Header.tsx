@@ -1,49 +1,67 @@
 import Image from "next/image";
+import Link from "next/link";
 import NavLinks from "./NavLinks";
 import Marquee from "../home/Marquee";
 
 const Header = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
+  const date = new Intl.DateTimeFormat("bn-BD", {
     dateStyle: "full",
-  });
+  }).format(new Date());
+
   return (
-    <header className="w-full bg-white border-b border-gray-100 pt-2">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="hidden md:block w-36" aria-hidden="true" />
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex items-center gap-2">
-            <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center shadow-sm">
-              <Image
-                className="w-6 h-6"
-                height={300}
-                width={300}
-                src="/Logo.png"
-                alt="Logo"
-              ></Image>
-            </div>
+    <header className="w-full bg-white border-b border-gray-100 pt-3 shadow-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-3 flex items-center justify-between gap-4">
+        {/* ব্যালেন্সের জন্য বাম স্পেসার (ডেস্কটপে ডানদিকের বাটনের সমান প্রস্থ) */}
+        <div className="hidden md:block w-36 shrink-0" aria-hidden="true" />
 
-            <div>
-              <div className="text-3xl md:text-4xl font-bold tracking-tight">
-                <span className="text-red-600">লাল</span> খবর
-              </div>
-              <div className="text-[-10px] md:text-xs text-gray-500 font-medium">
-                {date}
-              </div>
-            </div>
+        {/* সেন্টার: লোগো, ব্র্যান্ড নাম ও বাংলা তারিখ */}
+        <Link
+          href="/"
+          className="flex items-center gap-3 group focus:outline-hidden"
+        >
+          <div className="w-11 h-11 sm:w-12 sm:h-12 bg-slate-900 rounded-xl flex items-center justify-center shadow-xs shrink-0 group-hover:scale-105 transition-transform duration-200">
+            <Image
+              className="w-6 h-6 object-contain"
+              height={24}
+              width={24}
+              src="/Logo.png"
+              alt="লাল খবর লোগো"
+              priority
+            />
           </div>
-        </div>
 
-        <div className="flex items-center gap-4">
-          <button className="text-sm font-medium text-gray-700 hover:text-red-700 transition-colors">
+          <div className="flex flex-col">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold tracking-tight text-gray-900 leading-none">
+              <span className="text-red-600">লাল</span> খবর
+            </div>
+            <span className="text-[11px] sm:text-xs text-gray-500 font-medium mt-1 select-none">
+              {date}
+            </span>
+          </div>
+        </Link>
+
+        {/* ডানপাশ: অথেন্টিকেশন বাটন */}
+        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          <button
+            type="button"
+            className="text-xs sm:text-sm font-medium text-gray-700 hover:text-red-700 transition-colors px-2 py-1.5"
+          >
             সাইন ইন
           </button>
-          <button className="btn bg-red-700 hover:bg-red-800 text-white text-sm font-medium px-4 py-2 rounded-md shadow-sm transition-colors">
+          <button
+            type="button"
+            className="bg-red-700 hover:bg-red-800 active:scale-95 text-white text-xs sm:text-sm font-medium px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg shadow-xs transition-all duration-150"
+          >
             সাইন আপ
           </button>
         </div>
       </div>
-      <NavLinks/>
-      <Marquee/>
+
+      {/* নেভিগেশন বার */}
+      <NavLinks />
+
+      {/* স্ক্রলিং ব্রেকিং নিউজ মারকুই */}
+      <Marquee />
     </header>
   );
 };
