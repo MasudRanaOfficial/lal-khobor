@@ -1,12 +1,13 @@
 import Image from "next/image";
 import NavLinks from "./NavLinks";
+import Marquee from "../home/Marquee";
 
 const Header = () => {
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
   return (
-    <header className="w-full bg-white border-b border-gray-100 py-4 px-6 md:px-12">
+    <header className="w-full bg-white border-b border-gray-100 pt-2">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="hidden md:block w-36" aria-hidden="true" />
         <div className="flex flex-col items-center justify-center">
@@ -42,6 +43,7 @@ const Header = () => {
         </div>
       </div>
       <NavLinks/>
+      <Marquee/>
     </header>
   );
 };

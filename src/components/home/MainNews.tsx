@@ -14,7 +14,7 @@ const MainNews = ({ news }: MainNewsProps) => {
   const [firstNews, ...otherNews] = news;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Left Column: Featured News Card */}
       <div className="card bg-base-100 border border-gray-200 rounded-xl overflow-hidden shadow-xs">
         <figure className="relative w-full aspect-16/10 overflow-hidden bg-gray-100">

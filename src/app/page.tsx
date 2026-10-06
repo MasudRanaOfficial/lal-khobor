@@ -1,6 +1,5 @@
 import NewsCard from "@/components/cards/NewsCard";
 import MainNews from "@/components/home/MainNews";
-import Marquee from "@/components/home/Marquee";
 import MostRead from "@/components/home/MostRead";
 import { Article } from "@/types/newstypes";
 import { homePageData } from "@/utils/api";
@@ -21,9 +20,8 @@ export default async function Home() {
 
   return (
     <div>
-      <Marquee />
 
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      <main className="px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main News & Sections (Left 2 Columns) */}
           <div className="lg:col-span-2 flex flex-col gap-8">
@@ -32,7 +30,7 @@ export default async function Home() {
             <div className="flex flex-col gap-10">
               {otherSections.map((os) => (
                 <section key={os.curationId}>
-                  <h2 className="text-lg font-bold border-b-2 pb-1 border-red-700 mb-4 inline-block">
+                  <h2 className="text-lg font-bold border-b-2 pb-1 border-red-700 mb-4">
                     {os.title}
                   </h2>
 

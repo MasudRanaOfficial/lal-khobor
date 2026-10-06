@@ -4,7 +4,7 @@ const MostRead = async () => {
   const data = await mostReadData();
 
   return (
-    <section className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm max-w-sm">
+    <section className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm w-full">
       <h2 className="text-xl font-bold text-gray-900 mb-5">সর্বাধিক পঠিত</h2>
 
       <div className="space-y-4">

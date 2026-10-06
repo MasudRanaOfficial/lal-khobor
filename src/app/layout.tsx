@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       >
         <Header/>
         
-        {children}
+        <main className="max-w-7xl mx-auto">{children}</main>
         <Footer/>
         </body>
     </html>
