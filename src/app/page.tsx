@@ -8,7 +8,6 @@ export default async function Home() {
   const data = await homePageData();
 
   const validSections = (data ?? []).filter((section) => {
-    
     const hasSocialLinks = section.articles?.some(
       (article: Article) => article.type === "link",
     );
@@ -20,8 +19,7 @@ export default async function Home() {
 
   return (
     <div>
-
-      <main className="px-4 py-6">
+      <main className="px-4 py-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main News & Sections (Left 2 Columns) */}
           <div className="lg:col-span-2 flex flex-col gap-8">
@@ -47,7 +45,7 @@ export default async function Home() {
           {/* Sidebar / Most Read Section (Right 1 Column) */}
           <aside className="lg:col-span-1">
             {/* Sidebar widgets or most-read articles go here */}
-            <MostRead/>
+            <MostRead />
           </aside>
         </div>
       </main>

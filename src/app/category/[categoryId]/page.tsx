@@ -20,7 +20,7 @@ const CategoryDetailPage = async ({ params }: CategoryDetailPageProps) => {
   const categoryNews = Array.isArray(data.data) ? data.data : [];
 
   return (
-    <div className="px-4 py-6">
+    <div className="px-4 py-6 max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold border-b-2 pb-1 border-red-700 mb-4">
         {data.title}
       </h1>
