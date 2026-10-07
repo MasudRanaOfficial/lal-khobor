@@ -19,20 +19,22 @@ const SignInPage = () => {
     const email = String(formData.get("email") || "");
     const password = String(formData.get("password") || "");
 
-    const { data, error } = await authClient.signIn.email({
-      email,
-      password,
-      callbackURL: "/",
-    });
+    try {
+      const { data, error } = await authClient.signIn.email({
+        email,
+        password,
+        callbackURL: "/",
+      });
 
-    setLoading(false);
-
-    if (data) {
-      router.push("/");
-    }
-
-    if (error) {
-      setErrorMessage(error.message || "ইমেইল বা পাসওয়ার্ড সঠিক নয়।");
+      if (error) {
+        setErrorMessage(error.message || "ইমেইল বা পাসওয়ার্ড সঠিক নয়।");
+      } else if (data) {
+        router.push("/");
+      }
+    } catch {
+      setErrorMessage("সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।");
+    } finally {
+      setLoading(false);
     }
   };
 
