@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
+import toast from "react-hot-toast";
+
 const UserInfo = () => {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
@@ -29,7 +31,12 @@ const UserInfo = () => {
 
   const handleSignOut = async () => {
     setIsOpen(false);
-    await authClient.signOut();
+    try {
+      await authClient.signOut();
+      toast.success("সফলভাবে সাইন আউট করা হয়েছে!");
+    } catch {
+      toast.error("সাইন আউট ব্যর্থ হয়েছে।");
+    }
   };
 
   // Loading skeleton placeholder

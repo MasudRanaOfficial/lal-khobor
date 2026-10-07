@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -18,39 +19,54 @@ const SignUpPage = () => {
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData.entries());
 
-    const { data, error } = await authClient.signUp.email({
-      name: String(formValues.name),
-      email: String(formValues.email),
-      password: String(formValues.password),
-      image: formValues.image ? String(formValues.image) : undefined,
-      callbackURL: "/",
-    });
+    try {
+      const { data, error } = await authClient.signUp.email({
+        name: String(formValues.name),
+        email: String(formValues.email),
+        password: String(formValues.password),
+        image: formValues.image ? String(formValues.image) : undefined,
+        callbackURL: "/",
+      });
 
-    setLoading(false);
+      if (data) {
+        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
+        router.push("/");
+      }
 
-    if (data) {
-      router.push("/");
-    }
-
-    if (error) {
-      setErrorMessage(
-        error.message || "সাইন আপ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।",
-      );
+      if (error) {
+        const msg = error.message || "সাইন আপ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।";
+        setErrorMessage(msg);
+        toast.error(msg);
+      }
+    } catch {
+      const msg = "সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।";
+      setErrorMessage(msg);
+      toast.error(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSigninWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/",
-    });
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    } catch {
+      toast.error("Google দিয়ে সাইন আপ ব্যর্থ হয়েছে।");
+    }
   };
 
   const handleSigninWithGithub = async () => {
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/",
-    });
+    try {
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/",
+      });
+    } catch {
+      toast.error("GitHub দিয়ে সাইন আপ ব্যর্থ হয়েছে।");
+    }
   };
 
   return (

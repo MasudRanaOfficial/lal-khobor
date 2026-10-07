@@ -16,6 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -44,24 +45,33 @@ const ProfilePage = () => {
       });
 
       if (error) {
-        setErrorMessage(error.message || "প্রোফাইল আপডেট ব্যর্থ হয়েছে।");
+        const msg = error.message || "প্রোফাইল আপডেট ব্যর্থ হয়েছে।";
+        setErrorMessage(msg);
+        toast.error(msg);
       } else {
-        setSuccessMessage("প্রোফাইল সফলভাবে আপডেট করা হয়েছে!");
+        const msg = "প্রোফাইল সফলভাবে আপডেট করা হয়েছে!";
+        setSuccessMessage(msg);
+        toast.success(msg);
         setIsEditing(false);
         router.refresh();
       }
     } catch {
-      setErrorMessage(
-        "সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।",
-      );
+      const msg = "সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।";
+      setErrorMessage(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
   };
 
   const handleSignOut = async () => {
-    await authClient.signOut();
-    router.push("/");
+    try {
+      await authClient.signOut();
+      toast.success("সফলভাবে সাইন আউট করা হয়েছে!");
+      router.push("/");
+    } catch {
+      toast.error("সাইন আউট ব্যর্থ হয়েছে।");
+    }
   };
 
   // ১. লোডিং অবস্থা

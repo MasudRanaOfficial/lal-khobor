@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignInPage = () => {
   const router = useRouter();
@@ -27,31 +28,42 @@ const SignInPage = () => {
       });
 
       if (error) {
-        setErrorMessage(error.message || "ইমেইল বা পাসওয়ার্ড সঠিক নয়।");
+        const msg = error.message || "ইমেইল বা পাসওয়ার্ড সঠিক নয়।";
+        setErrorMessage(msg);
+        toast.error(msg);
       } else if (data) {
+        toast.success("সফলভাবে সাইন ইন হয়েছে!");
         router.push("/");
       }
     } catch {
-      setErrorMessage(
-        "সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।",
-      );
+      const msg = "সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।";
+      setErrorMessage(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
   };
 
   const handleSigninWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/",
-    });
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    } catch {
+      toast.error("Google দিয়ে সাইন ইন ব্যর্থ হয়েছে।");
+    }
   };
 
   const handleSigninWithGithub = async () => {
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/",
-    });
+    try {
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/",
+      });
+    } catch {
+      toast.error("GitHub দিয়ে সাইন ইন ব্যর্থ হয়েছে।");
+    }
   };
 
   return (
