@@ -85,7 +85,7 @@ Major libraries and dependencies used in this project:
 1. Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/MasudRanaOfficial/lal-khobor.git
+git clone https://github.com/masudbuilds/lal-khobor.git
 cd lal-khobor
 npm install
 ```
@@ -183,4 +183,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 **Live URL:** [Live Site](https://lal-khobor.vercel.app/)  
-**GitHub Repository:** [https://github.com/MasudRanaOfficial/lal-khobor](https://github.com/MasudRanaOfficial/lal-khobor)
+**GitHub Repository:** [https://github.com/masudbuilds/lal-khobor](https://github.com/masudbuilds/lal-khobor)
