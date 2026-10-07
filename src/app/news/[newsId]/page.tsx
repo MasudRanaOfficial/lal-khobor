@@ -2,9 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ArticleDetail, BodyBlock } from "@/types/newsarticletypes";
 import LiveCoverageNotice from "@/components/others/LiveCoverageNotice";
 import BookmarkButton from "@/components/news/BookmarkButton";
+import { getPrankArticle } from "@/data/prankNews";
 
 const toBengaliNumber = (num: number | string): string => {
   const bengaliDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
@@ -39,6 +41,53 @@ const formatBengaliDate = (isoString: string): string => {
   }
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ newsId: string }> | { newsId: string };
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const newsId = resolvedParams.newsId;
+
+  // প্রাঙ্ক নিউজের জন্য মেটাডাটা
+  const prank = getPrankArticle(newsId);
+  if (prank) {
+    return {
+      title: `${prank.title} | লাল খবর`,
+      description: "জীবন যৌবন সব হারিয়ে পথের ভিখারি আজ এক সময়ের কুটিপতি। বিস্তারিত পড়ুন লাল খবরে...",
+      openGraph: {
+        title: prank.title,
+        description: "জীবন যৌবন সব হারিয়ে পথের ভিখারি আজ এক সময়ের কুটিপতি। বিস্তারিত পড়ুন লাল খবরে...",
+        images: prank.imageUrl ? [prank.imageUrl] : [],
+      },
+    };
+  }
+
+  try {
+    const res = await fetch(
+      `https://news-api-v2.vercel.app/api/article/${newsId}`,
+      { next: { revalidate: 60 } },
+    );
+    const data = await res.json();
+    if (data.success && data.data) {
+      return {
+        title: `${data.data.title} | লাল খবর`,
+        description: data.data.title,
+        openGraph: {
+          title: data.data.title,
+          images: data.data.imageUrl ? [data.data.imageUrl] : [],
+        },
+      };
+    }
+  } catch {
+    // সাইলেন্ট ফেইল
+  }
+
+  return {
+    title: "সংবাদ বিস্তারিত | লাল খবর",
+  };
+}
+
 const NewsDetailPages = async ({
   params,
 }: {
@@ -47,28 +96,49 @@ const NewsDetailPages = async ({
   const resolvedParams = await params;
   const newsId = resolvedParams.newsId;
 
-  const res = await fetch(
-    `https://news-api-v2.vercel.app/api/article/${newsId}`,
-    { next: { revalidate: 60 } },
-  );
+  // প্রাঙ্ক বা কাস্টম নিউজ হ্যান্ডলিং
+  const prankArticle = getPrankArticle(newsId);
+  let liveUrl: string | null = null;
+  let isUnsupported = false;
+  let newsArticle: ArticleDetail | null = prankArticle;
 
-  const data = await res.json();
+  if (!newsArticle) {
+    let data: {
+      success?: boolean;
+      data?: ArticleDetail;
+      error?: { code?: string; message?: string };
+    } | null = null;
 
-  // লাইভ কন্টেন্ট হ্যান্ডলিং
-  if (!data.success && data.error?.code === "UNSUPPORTED_CONTENT") {
-    const liveUrlMatch = data.error.message.match(/https?:\/\/[^\s]+/);
-    const liveUrl = liveUrlMatch
-      ? liveUrlMatch[0]
-      : `https://www.bbc.com/bengali/live/${newsId}`;
+    try {
+      const res = await fetch(
+        `https://news-api-v2.vercel.app/api/article/${newsId}`,
+        { next: { revalidate: 60 } },
+      );
+      data = await res.json();
+    } catch {
+      notFound();
+    }
 
+    if (data && !data.success && data.error?.code === "UNSUPPORTED_CONTENT") {
+      isUnsupported = true;
+      const liveUrlMatch = data.error.message?.match(/https?:\/\/[^\s]+/);
+      liveUrl = liveUrlMatch
+        ? liveUrlMatch[0]
+        : `https://www.bbc.com/bengali/live/${newsId}`;
+    } else if (!data || !data.success || !data.data) {
+      notFound();
+    } else {
+      newsArticle = data.data;
+    }
+  }
+
+  if (isUnsupported && liveUrl) {
     return <LiveCoverageNotice id={newsId} sourceUrl={liveUrl} />;
   }
 
-  if (!data.success || !data.data) {
+  if (!newsArticle) {
     notFound();
   }
-
-  const newsArticle: ArticleDetail = data.data;
 
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
