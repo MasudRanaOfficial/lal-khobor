@@ -96,6 +96,11 @@ const UserInfo = () => {
                 <p className="text-xs text-gray-500 truncate mt-0.5">
                   {user.email}
                 </p>
+                <Link href={"/profile"}>
+                  <p className="w-full text-center px-3 py-2 text-sm text-black hover:text-red-500 hover:bg-gray-100 rounded-xl transition-colors cursor-pointer font-bold">
+                    বিস্তারিত
+                  </p>
+                </Link>
               </div>
 
               {/* Action items */}
