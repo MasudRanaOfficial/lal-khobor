@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { ChevronDown, LogOut, User as UserIcon } from "lucide-react";
+import { Bookmark, ChevronDown, LogOut, User as UserIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -103,10 +103,21 @@ const UserInfo = () => {
                 <p className="text-xs text-gray-500 truncate mt-0.5">
                   {user.email}
                 </p>
-                <Link href={"/profile"}>
-                  <p className="w-full text-center px-3 py-2 text-sm text-black hover:text-red-500 hover:bg-gray-100 rounded-xl transition-colors cursor-pointer font-bold">
-                    বিস্তারিত
-                  </p>
+                <Link
+                  href="/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-xl transition-colors font-medium mt-1"
+                >
+                  <UserIcon className="w-4 h-4 text-gray-400" />
+                  প্রোফাইল
+                </Link>
+                <Link
+                  href="/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:text-red-700 hover:bg-gray-50 rounded-xl transition-colors font-medium"
+                >
+                  <Bookmark className="w-4 h-4 text-gray-400" />
+                  সংরক্ষিত সংবাদ
                 </Link>
               </div>
 

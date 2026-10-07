@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleDetail, BodyBlock } from "@/types/newsarticletypes";
 import LiveCoverageNotice from "@/components/others/LiveCoverageNotice";
+import BookmarkButton from "@/components/news/BookmarkButton";
 
 const toBengaliNumber = (num: number | string): string => {
   const bengaliDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
@@ -108,12 +109,25 @@ const NewsDetailPages = async ({
               <span>{newsArticle.source || "বিবিসি বাংলা"}</span>
             )}
           </div>
-          <div className="text-xs sm:text-sm text-gray-500">
+          <div className="flex items-center gap-3">
             {newsArticle.firstPublished && (
-              <time dateTime={newsArticle.firstPublished}>
+              <time
+                dateTime={newsArticle.firstPublished}
+                className="text-xs sm:text-sm text-gray-500"
+              >
                 {formatBengaliDate(newsArticle.firstPublished)}
               </time>
             )}
+            <BookmarkButton
+              article={{
+                id: newsId,
+                title: newsArticle.title,
+                imageUrl: newsArticle.imageUrl,
+                category: newsArticle.topics?.[0]?.name || null,
+                source: newsArticle.source || null,
+                firstPublished: newsArticle.firstPublished,
+              }}
+            />
           </div>
         </div>
 
