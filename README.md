@@ -1,4 +1,5 @@
 # Lal Khobor (লাল খবর)
+
 A modern, fast, and responsive Bengali news portal web application built with Next.js 16, React 19, MongoDB, and Better Auth.
 
 ---
@@ -19,20 +20,24 @@ A modern, fast, and responsive Bengali news portal web application built with Ne
 
 ---
 
-## About the Project 
+## About the Project
+
 **Lal Khobor (লাল খবর)** is a dynamic digital newspaper and media platform designed to deliver the latest breaking news, category-based stories, and in-depth articles in Bengali. The platform provides a fast, clean, and accessible reading experience for readers across all devices, complete with modern authentication, article bookmarks, and customized user profiles.
 
 ---
 
-## Project Overview  
+## Project Overview
+
 The objective of Lal Khobor is to bridge modern web technologies with traditional journalism, providing users with a seamless, responsive, and interactive experience:
+
 - **Fast Performance:** Server-side and static optimization with Next.js 16 and Turbopack.
 - **Engaging UI/UX:** Clean editorial typography, breaking news ticker marquee, and tailored mobile-first layouts.
 - **Personalized Reader Experience:** Safe authentication allowing users to bookmark articles for reading later and manage their profiles.
 
 ---
 
-## Key Features  
+## Key Features
+
 - **Live News Marquee:** Real-time scrolling ticker displaying urgent and breaking news headlines.
 - **Category Browsing:** Categorized news feeds covering National, Politics, International, Sports, Technology, Entertainment, and more.
 - **Detailed Article View:** Rich editorial article reading layout with featured images, dates, and related news.
@@ -44,14 +49,16 @@ The objective of Lal Khobor is to bridge modern web technologies with traditiona
 
 ---
 
-## Tech Stack  
+## Tech Stack
+
 **Frontend:** Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · DaisyUI · TypeScript  
 **Backend:** Next.js API Routes · MongoDB Native Driver · Better Auth  
 **Tools & Libraries:** Lucide React · React Hot Toast · React Marquee Text · Vercel · Git
 
 ---
 
-## Dependencies  
+## Dependencies
+
 Major libraries and dependencies used in this project:
 
 ```json
@@ -74,6 +81,7 @@ Major libraries and dependencies used in this project:
 ---
 
 ## Installation️ & Setup
+
 1. Clone the repository and install dependencies:
 
 ```bash
@@ -148,15 +156,15 @@ lal-khobor/
 
 ---
 
-## Contributions (Optional)
+## Contributions
 
-| Name | Role | Contributions |
-|---|---|---|
+| Name       | Role                 | Contributions                                                 |
+| ---------- | -------------------- | ------------------------------------------------------------- |
 | Masud Rana | Full Stack Developer | Fullstack development, Authentication, Bookmarking, and UI/UX |
 
 ---
 
-## How to Contribute (Optional)
+## How to Contribute
 
 - Fork the Project
 - Create a feature branch (`git checkout -b feature/AmazingFeature`)
@@ -166,7 +174,8 @@ lal-khobor/
 
 ---
 
-## License (Optional)
+## License
+
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
