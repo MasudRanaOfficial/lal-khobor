@@ -88,39 +88,6 @@ const ProfilePage = () => {
     );
   }
 
-  // ২. লগইন না করা থাকলে
-  if (!user) {
-    return (
-      <div className="max-w-md mx-auto px-4 py-20 text-center">
-        <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
-          <div className="w-16 h-16 bg-red-50 text-red-700 rounded-full flex items-center justify-center mx-auto mb-4">
-            <User className="w-8 h-8" />
-          </div>
-          <h2 className="text-2xl font-bold font-serif text-gray-900 mb-2">
-            আপনি লগইন অবস্থায় নেই
-          </h2>
-          <p className="text-gray-500 text-sm mb-6">
-            প্রোফাইল তথ্য দেখতে অনুগ্রহ করে আপনার অ্যাকাউন্টে সাইন ইন করুন।
-          </p>
-          <div className="flex flex-col gap-3">
-            <Link
-              href="/signin"
-              className="w-full bg-red-700 hover:bg-red-800 text-white font-medium py-3 px-4 rounded-xl shadow-xs transition-colors"
-            >
-              সাইন ইন করুন
-            </Link>
-            <Link
-              href="/"
-              className="text-gray-600 hover:text-gray-900 text-sm font-medium py-2 transition-colors"
-            >
-              হোমপেজে ফিরে যান
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       {/* ব্যাক লিঙ্ক */}
@@ -146,7 +113,7 @@ const ProfilePage = () => {
           {/* অ্যাভাটার */}
           <div className="flex justify-between items-end -mt-14 sm:-mt-16 mb-4">
             <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md overflow-hidden bg-red-700 text-white flex items-center justify-center font-serif text-3xl font-bold relative z-10 shrink-0">
-              {user.image ? (
+              {user?.image ? (
                 <Image
                   alt={user.name || "Profile"}
                   src={user.image}
@@ -157,7 +124,7 @@ const ProfilePage = () => {
                 />
               ) : (
                 <span>
-                  {user.name ? (
+                  {user?.name ? (
                     user.name.charAt(0).toUpperCase()
                   ) : (
                     <User className="w-10 h-10" />
@@ -190,7 +157,7 @@ const ProfilePage = () => {
           <div className="space-y-1 mb-6">
             <div className="flex flex-wrap items-center gap-2.5">
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 font-serif">
-                {user.name}
+                {user?.name}
               </h1>
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200">
                 <ShieldCheck className="w-3.5 h-3.5" />
@@ -200,7 +167,7 @@ const ProfilePage = () => {
 
             <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
               <Mail className="w-4 h-4 text-gray-400 shrink-0" />
-              <span>{user.email}</span>
+              <span>{user?.email}</span>
             </div>
           </div>
 
@@ -244,7 +211,7 @@ const ProfilePage = () => {
                     name="name"
                     type="text"
                     required
-                    defaultValue={user.name || ""}
+                    defaultValue={user?.name || ""}
                     placeholder="আপনার নাম"
                     className="w-full pl-10 pr-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:border-red-700 transition-all"
                   />
@@ -265,7 +232,7 @@ const ProfilePage = () => {
                     id="image"
                     name="image"
                     type="url"
-                    defaultValue={user.image || ""}
+                    defaultValue={user?.image || ""}
                     placeholder="https://example.com/avatar.jpg"
                     className="w-full pl-10 pr-4 py-2.5 sm:py-3 bg-white border border-gray-300 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600/20 focus:border-red-700 transition-all"
                   />
@@ -296,7 +263,7 @@ const ProfilePage = () => {
           <div className="pt-6 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="text-xs text-gray-500">
               অ্যাকাউন্ট আইডি:{" "}
-              <span className="font-mono text-gray-700">{user.id}</span>
+              <span className="font-mono text-gray-700">{user?.id}</span>
             </div>
 
             <button

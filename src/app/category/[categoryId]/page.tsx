@@ -1,5 +1,6 @@
 import NewsCard from "@/components/cards/NewsCard";
 import { Article } from "@/types/newstypes";
+import { notFound } from "next/navigation";
 
 interface CategoryDetailPageProps {
   params: Promise<{ categoryId: string }>;
@@ -16,8 +17,17 @@ const CategoryDetailPage = async ({ params }: CategoryDetailPageProps) => {
   const res = await fetch(
     `https://news-api-v2.vercel.app/api/category/${categoryId}`,
   );
+
+  if (!res.ok) {
+    notFound();
+  }
+
   const data = (await res.json()) as CategoryResponse;
   const categoryNews = Array.isArray(data.data) ? data.data : [];
+
+  if (categoryNews.length === 0) {
+    notFound();
+  }
 
   return (
     <div className="px-4 py-6 max-w-7xl mx-auto">
